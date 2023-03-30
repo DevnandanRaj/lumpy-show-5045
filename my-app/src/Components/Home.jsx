@@ -1,14 +1,14 @@
 import React from "react";
-import chakraTheme from '@chakra-ui/theme'
 import { ChakraProvider} from '@chakra-ui/react'
+import { Navbar } from "./Navbar";
 
-
-function LandingPage() {
+function Home() {
   return (
     <ChakraProvider>
       <div>
-        {}
+        <Navbar/>
       </div>
     </ChakraProvider>
   );
 }
+export default Home;
