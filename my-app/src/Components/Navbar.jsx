@@ -1,122 +1,41 @@
-import { useState } from "react";
-import { Link, useNavigate, BrowserRouter as Router } from "react-router-dom";
-import {
-  Box,
-  Flex,
-  Heading,
-  IconButton,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Spacer,
-  Text,
-  useToast,
-} from "@chakra-ui/react";
-import { HiOutlineShoppingBag } from "react-icons/hi";
-import { FiSearch, FiHeart } from "react-icons/fi";
-import { RiContactsLine } from "react-icons/ri";
-
-export const Navbar = () => {
-  const navigate = useNavigate();
-  const z = JSON.parse(localStorage.getItem("user")) || "Login";
-  const [refreser, setRefreser] = useState(false);
-  const toast = useToast();
-
-  const handleCart = () => {
-    if (z === "Login") {
-      toast({
-        title: "Please log in",
-        description: "You must log in to access the cart.",
-        status: "warning",
-        duration: 3000,
-        isClosable: true,
-      });
-      navigate("/login");
-      return;
-    }
-    navigate("/checkoutpage");
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("sephoraAddress");
-    localStorage.removeItem("sai");
-    setRefreser(!refreser);
-  };
-
+import { BellIcon, EmailIcon, Search2Icon } from "@chakra-ui/icons";
+import { Button, Heading } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import React from "react";
+import Beautsio from "./Images/Beautsio.png"
+import "./Navbar.css"
+const Navbar = () => {
+  
   return (
-    <Router>
-      <Box as="nav" bgColor="white" py={2} boxShadow="md">
-        <Flex align="center" maxW="6xl" mx="auto">
-          <Box flex="1">
-            <InputGroup>
-              <InputLeftElement children={<FiSearch />} />
-              <Input
-                type="text"
-                placeholder="Search SEPHORA"
-                rounded="full"
-                _focus={{ outline: "none", boxShadow: "outline" }}
-              />
-            </InputGroup>
-          </Box>
-          <Box>
-            <Link to={`/`}>
-              <Heading as="h1" size="lg">
-                SEPHORA
-              </Heading>
+    <>
+      <div id="nav1">
+        <a href="#">
+         <span ><strong>Score 50% off</strong>†† your favorite brands. <strong>Shop Now</strong>▸| Free shipping† on all orders. †Terms apply.</span>
+        </a>
+        </div>
+      <div id="nav2">
+        <div>
+          <div id="logo">
+            <Link to="/">
+              <img  src={Beautsio} alt="Logo" />
             </Link>
-          </Box>
-          <Spacer />
-          <Flex align="center">
-            <IconButton
-              aria-label="favorites"
-              icon={<FiHeart />}
-              mr={2}
-              variant="ghost"
-            />
-            <IconButton
-              aria-label="cart"
-              icon={<HiOutlineShoppingBag />}
-              mr={2}
-              variant="ghost"
-              onClick={handleCart}
-              cursor="pointer"
-            />
-            {z === "Login" ? (
-              <Link to={`/login`}>
-                <IconButton
-                  aria-label="login"
-                  icon={<RiContactsLine />}
-                  variant="ghost"
-                  mr={2}
-                />
-              </Link>
-            ) : null}
-            <Text
-              fontSize="md"
-              fontWeight="bold"
-              mr={2}
-              color={z !== "Login" ? "pink.500" : "black"}
-              cursor={z !== "Login" ? "pointer" : "default"}
-              _hover={{ textDecoration: "underline" }}
-            >
-              {z}
-            </Text>
-            {z !== "Login" ? (
-              <Text
-                fontSize="md"
-                fontWeight="bold"
-                color="pink.500"
-                cursor="pointer"
-                _hover={{ textDecoration: "underline" }}
-                onClick={handleLogout}
-              >
-                Logout
-              </Text>
-            ) : null}
-          </Flex>
-        </Flex>
-      </Box>
-      </Router>
+          </div>
+          <input type="text" name="" id="" placeholder="🔍 Search" />
+          <div className="dropdown">
+            <span>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3443/3443338.png"
+                alt=""
+              />
+            </span>
+            <p>
+              Stores & Services <br />
+              <span className="nav2-sub-section">Pick a Store</span>{" "}
+            </p>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
+export default Navbar;
